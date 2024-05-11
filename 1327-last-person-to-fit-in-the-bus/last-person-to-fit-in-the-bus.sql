@@ -1,7 +1,7 @@
 # Write your MySQL query statement below
 
 SELECT 
-    q1.person_name
+    q1.person_name as person_name
 FROM
     Queue q1 INNER JOIN Queue q2
     ON q1.turn >= q2.turn
