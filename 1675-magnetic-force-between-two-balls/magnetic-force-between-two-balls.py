@@ -1,4 +1,30 @@
 class Solution:
+
+    def maxDistance(self, position: List[int], m: int) -> int:
+
+        def check(minmax):
+            rem = m - 1
+            lim = position[0] + minmax
+            for p in position[1:]:
+                if p >= lim:
+                    rem -= 1
+                    lim = p + minmax
+            return rem <= 0
+
+        position.sort()
+        if m == 2:
+            return position[-1] - position[0]
+        low = 1
+        high = (position[-1] - position[0]) // (m - 1)
+        while low < high:
+            mid = (low + high + 1) // 2
+            if check(mid):
+                low = mid
+            else:
+                high = mid -1
+        return low    
+"""
+class Solution:
     def fn(self, p, m, mid):
         cnt = 1
         prev = p[0]
@@ -21,3 +47,4 @@ class Solution:
         if self.fn(p, m, hi):
             return hi
         return lo
+"""
