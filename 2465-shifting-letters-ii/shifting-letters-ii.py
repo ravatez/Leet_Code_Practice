@@ -12,7 +12,7 @@ class Solution:
         for i in reversed(range(len(prefix_diff))):     
             diff += prefix_diff[i]
 
-            res[i - 1] = (diff + res[i - 1]) % 26 
+            res[i - 1] = (diff + res[i - 1] + 26) % 26 
 
         s = [chr(ord("a") + n) for n in res]
         return "".join(s)
