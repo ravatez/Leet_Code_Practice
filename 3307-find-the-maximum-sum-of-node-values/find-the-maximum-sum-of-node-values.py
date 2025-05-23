@@ -1,14 +1,12 @@
 class Solution:
     def maximumValueSum(self, nums: List[int], k: int, edges: List[List[int]]) -> int:
-        delta = [(n ^ k) - n for n in nums]
-        delta.sort(reverse = True)
-        res = sum(nums)
-        for i in range(0, len(nums), 2):
-            if i == len(nums) - 1:
-                break
-            path_delta = delta[i] + delta[i+1]
-            if path_delta <= 0:
-                break
-            res += path_delta
-
-        return res
+        n=len(nums)
+        @cache
+        def f(i, c):
+            if i==n:
+                if c==1: return -(1<<31)
+                return 0
+            x=nums[i]
+            return max(x+f(i+1, c),(x^k)+f(i+1,1-c))
+        return f(0, 0)
+        
